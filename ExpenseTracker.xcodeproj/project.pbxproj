@@ -111,7 +111,7 @@
 		49714AFC2C3B86C300BBCF11 /* AddOrEditTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTransactionViewModel.swift; sourceTree = "<group>"; };
 		49714AFE2C3B86D900BBCF11 /* AddOrEditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTransactionView.swift; sourceTree = "<group>"; };
 		49714B022C3B972F00BBCF11 /* ExpenseTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTransaction.swift; sourceTree = "<group>"; };
-		49C8E84B2CAB02F300FB817D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		49C8E84C2CAB07B400FB817D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +253,7 @@
 				49714A882C30E2DB00BBCF11 /* ExpenseTrackerApp.swift */,
 				49714AE82C3342EF00BBCF11 /* Extensions.swift */,
 				49714AF62C33798400BBCF11 /* DataSingleton.swift */,
-				49C8E84B2CAB02F300FB817D /* Config.xcconfig */,
+				49C8E84C2CAB07B400FB817D /* Config.xcconfig */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -481,7 +481,7 @@
 /* Begin XCBuildConfiguration section */
 		49714AA72C30E2DF00BBCF11 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49C8E84B2CAB02F300FB817D /* Config.xcconfig */;
+			baseConfigurationReference = 49C8E84C2CAB07B400FB817D /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -545,7 +545,7 @@
 		};
 		49714AA82C30E2DF00BBCF11 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49C8E84B2CAB02F300FB817D /* Config.xcconfig */;
+			baseConfigurationReference = 49C8E84C2CAB07B400FB817D /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
