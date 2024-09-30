@@ -12,9 +12,9 @@ import Foundation
 class DataSingleton: ObservableObject {
     static let instance: DataSingleton = DataSingleton()
     @Published var currentUserID: String = ""
-    @Published var categories: [String: ExpenseCategory] = ["Grocery":ExpenseCategory(name: "Grocery", img: "😭", spent: 30, subCategories: ["大统华", "Costco", "大百汇"])]
+    @Published var categories: [String: ExpenseCategory] = ["Grocery":ExpenseCategory(id: "Grocery", img: "😭", spent: 30, subCategories: ["大统华", "Costco", "大百汇"])]
     @Published var subCategories: Set<String> = []
-    @Published var models: [CategoryModel] = [CategoryModel(cObj: ExpenseCategory(name: "Grocery", img: "😭", spent: 30, subCategories: ["大统华", "Costco", "大百汇"]), clicked: false)]
+    @Published var models: [CategoryModel] = [CategoryModel(cObj: ExpenseCategory(id: "Grocery", img: "😭", spent: 30, subCategories: ["大统华", "Costco", "大百汇"]), clicked: false)]
     @Published var transactions: [String: ExpenseTransaction] = [:]
     private var handler: AuthStateDidChangeListenerHandle?
     
@@ -30,8 +30,18 @@ class DataSingleton: ObservableObject {
         return Auth.auth().currentUser != nil && !currentUserID.isEmpty
     }
     
+    public func resetModels () {
+        for i in models.indices {
+            models[i].clicked = false
+        }
+    }
+    
+    public func click (index: Int) {
+        models[index].clicked.toggle()
+    }
+    
     public func getCategory (cat: String) -> ExpenseCategory {
-        return categories[cat] ?? ExpenseCategory(name: "", img: "", spent: 0, subCategories: [""])
+        return categories[cat] ?? ExpenseCategory(id: "", img: "", spent: 0, subCategories: [""])
     }
     
     public func containsSubCategory (sub: String) -> Bool {
@@ -44,12 +54,8 @@ class DataSingleton: ObservableObject {
     
     public func addCategory (cat: ExpenseCategory) {
         subCategories.formUnion(cat.subCategories)
-        categories[cat.name] = cat
+        categories[cat.id] = cat
         models.append(CategoryModel(cObj: cat))
-    }
-    
-    public func click (index: Int) {
-        models[index].clicked.toggle()
     }
     
     public func removeCategory (cat: String) {
@@ -60,7 +66,7 @@ class DataSingleton: ObservableObject {
     }
     
     public func getTransaction (id: String) -> ExpenseTransaction {
-        return transactions[id] ?? ExpenseTransaction(id: "", amount: 0, description: "", category: "", subCategory: "")
+        return transactions[id] ?? ExpenseTransaction(id: "", amount: 0, description: "", category: "", subCategory: "", createdDate: Date().timeIntervalSince1970)
     }
     
     public func containsTransaction (id: String) -> Bool {
@@ -68,6 +74,10 @@ class DataSingleton: ObservableObject {
     }
     
     public func addTransaction (tra: ExpenseTransaction) {
-        
+        transactions[tra.id] = tra
+    }
+    
+    public func removeTransaction (id: String) {
+        transactions[id] = nil
     }
 }

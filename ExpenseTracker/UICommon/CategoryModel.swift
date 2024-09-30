@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryModel: View {
-    var cObj: ExpenseCategory = ExpenseCategory(name: "Grocery", img: "🥬", spent: 400000, subCategories: [])
+    var cObj: ExpenseCategory = ExpenseCategory(id: "Grocery", img: "🥬", spent: 400000, subCategories: [])
     var clicked: Bool = false
 //    BudgetModel(dict: [ "name": "Auto & Transport",
 //                                                       "icon": "auto_&_transport",
@@ -26,7 +26,7 @@ struct CategoryModel: View {
                     .foregroundColor(.white)
                 
                 VStack{
-                    Text(cObj.name)
+                    Text(cObj.id)
                         .font(.customfont(.semibold, fontSize: 14))
                         .foregroundColor(.white)
                         .frame(minWidth: 0, maxWidth: 100, alignment: .leading)

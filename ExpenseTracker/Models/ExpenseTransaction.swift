@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct ExpenseTransaction: Codable {
+struct ExpenseTransaction: Codable, Identifiable {
     let id: String
     var amount: Double
     var description: String
     let category: String
     let subCategory: String
+    let createdDate: TimeInterval
 }

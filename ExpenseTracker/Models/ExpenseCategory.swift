@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ExpenseCategory: Codable {
-    let name: String
+struct ExpenseCategory: Codable, Identifiable {
+    let id: String
     let img: String
     let spent: Double
     let subCategories: [String]

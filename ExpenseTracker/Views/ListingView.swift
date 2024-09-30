@@ -5,28 +5,25 @@
 //  Created by Arthur Zhang on 2024-06-30.
 //
 
+
+import FirebaseFirestoreSwift
 import SwiftUI
 
 struct ListingView: View {
     @StateObject var viewModel = ListingViewModel()
-    private let userId: String
+    @FirestoreQuery var items: [ExpenseTransaction]
     
     init(userId: String) {
-        self.userId = userId
+        self._items = FirestoreQuery(collectionPath: "users/\(userId)/transactions")
     }
     
     var body: some View {
         NavigationView {
-            List {
-//                ForEach(company.departments) { department in
-//                    Section(header: Text(department.name)) {
-//                        ForEach(department.staff) { person in
-//                            NavigationLink(destination: PersonDetailView(person: person)) {
-//                                PersonRowView(person: person)
-//                            }
-//                        }
-//                    }
-//                }
+            VStack {
+                List(items) { item in
+                    Text(item.amount.description)
+                }
+                .listStyle(.plain)
             }
             .navigationTitle("Transactions")
             .toolbar{
@@ -50,5 +47,5 @@ struct ListingView: View {
 }
 
 #Preview {
-    ListingView(userId: "")
+    ListingView(userId: "Za54qIrdRufeXzJ5xcTniwXWWQI2")
 }

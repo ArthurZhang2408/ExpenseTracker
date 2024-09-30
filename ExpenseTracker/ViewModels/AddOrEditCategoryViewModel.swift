@@ -36,7 +36,7 @@ class AddOrEditCategoryViewModel: ObservableObject {
         }
         instance.removeCategory(cat: oldName)
         let spent = (oldName.isEmpty) ? 0 : instance.getCategory(cat: oldName).spent
-        let newCategory: ExpenseCategory = ExpenseCategory(name: category, img: icon, spent: spent, subCategories: subCategories)
+        let newCategory: ExpenseCategory = ExpenseCategory(id: category, img: icon, spent: spent, subCategories: subCategories)
 //        category = ""
 //        subCategories = [""]
 //        icon = ""

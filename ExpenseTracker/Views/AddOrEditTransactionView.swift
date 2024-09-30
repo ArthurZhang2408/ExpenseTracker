@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AddOrEditTransactionView: View {
     
-    @StateObject var viewModel = AddOrEditTransactionViewModel()
+    @StateObject var viewModel = AddOrEditTransactionViewModel(id: "")
     @Binding var showingNewItemView: Bool
-    @EnvironmentObject var instance: DataSingleton
+    @EnvironmentObject var envObj: DataSingleton
     
     var body: some View {
         ZStack{
@@ -50,6 +50,14 @@ struct AddOrEditTransactionView: View {
                         .padding(.top, 30)
                         .padding(.bottom, 20)
                         
+                        DatePicker("Created", selection: $viewModel.createdDate).datePickerStyle(DefaultDatePickerStyle())
+                        
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 20)
+                            .font(.customfont(.regular, fontSize: 14))
+                            
+                            .foregroundColor(.gray50)
+                        
                         Text("Categories")
                             .multilineTextAlignment(.leading)
                             .font(.customfont(.regular, fontSize: 14))
@@ -59,19 +67,19 @@ struct AddOrEditTransactionView: View {
                             .padding(.horizontal, 20)
                             .padding(.bottom, 4)
                         LazyVStack(spacing: 15) {
-                            ForEach(0..<instance.models.count, id: \.self) {index in
+                            ForEach(0..<viewModel.instance.models.count, id: \.self) {index in
                                 //                        Text(self.listArr[$0])
                                 Button {
-                                    instance.click(index: index)
+                                    viewModel.click(index: index)
                                     print(index)
                                 } label: {
-                                    instance.models[index]
+                                    viewModel.instance.models[index]
                                 }
-                                if (instance.models[index].clicked) {
-                                    ForEach(instance.models[index].cObj.subCategories, id: \.self) {sub in
+                                if (viewModel.instance.models[index].clicked) {
+                                    ForEach(viewModel.instance.models[index].cObj.subCategories, id: \.self) {sub in
                                         
                                         Button {
-                                            viewModel.select(sub: sub)
+                                            viewModel.select(sub: sub, catInd: index)
                                         } label: {
                                             Text(sub)
                                                 .font(.customfont(.semibold, fontSize: 14))
@@ -136,6 +144,7 @@ struct AddOrEditTransactionView: View {
                 })
                 .padding(.bottom, .bottomInsets + 8)
             }
+            .scrollDismissesKeyboard(.immediately)
         }
         .navigationTitle("")
         .navigationBarHidden(true)
