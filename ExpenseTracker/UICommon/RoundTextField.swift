@@ -102,7 +102,7 @@ struct RoundTextField: View {
                 TextField("", text: $text)
                     .padding(15)
                     .keyboardType(.default)
-                    .frame(height: 48)
+                    .frame(height: 48.0)
                     .overlay {
                         RoundedRectangle(cornerRadius:  15)
                             .stroke(Color.gray70, lineWidth: 1)

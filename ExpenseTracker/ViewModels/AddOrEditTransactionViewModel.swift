@@ -9,6 +9,23 @@ import FirebaseFirestore
 import Foundation
 import SwiftUI
 
+public enum Currency: String, CaseIterable, Identifiable {
+    case CAD, CNH, USD, EUR, GBP
+    public var id: Self { self }
+}
+
+extension String {
+    var currency: Currency {
+        switch self {
+        case "CNH": return .CNH
+        case "USD": return .USD
+        case "EUR": return .EUR
+        case "GBP": return .GBP
+        default: return .CAD
+        }
+    }
+}
+
 class AddOrEditTransactionViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var description: String = ""
@@ -19,6 +36,7 @@ class AddOrEditTransactionViewModel: ObservableObject {
     @Published var createdDate: Date = Date()
     @Published var showingNewCategoryView: Bool = false
     @Published var showAlert: Bool = false
+    @Published var currency: Currency = .CAD
     let title: String
     let curr: ExpenseTransaction
     let instance = DataSingleton.instance
@@ -31,6 +49,7 @@ class AddOrEditTransactionViewModel: ObservableObject {
         subCategory = curr.subCategory
         amount = String(curr.amount)
         createdDate = Date(timeIntervalSince1970: curr.createdDate)
+        currency = curr.currency.currency
         title = id.isEmpty ? "ADD" : "EDIT"
         DispatchQueue.main.async {
             self.instance.resetModels()
@@ -44,7 +63,7 @@ class AddOrEditTransactionViewModel: ObservableObject {
         }
         instance.removeTransaction(id: oldId)
         let id: String = (oldId.isEmpty) ? UUID().uuidString : oldId
-        let newTra: ExpenseTransaction = ExpenseTransaction(id: id, amount: Double(amount) ?? 0, description: description, category: category, subCategory: subCategory, createdDate: createdDate.timeIntervalSince1970)
+        let newTra: ExpenseTransaction = ExpenseTransaction(id: id, amount: Double(amount) ?? 0, description: description, category: category, subCategory: subCategory, createdDate: createdDate.timeIntervalSince1970, currency: currency.rawValue)
         let db = Firestore.firestore()
         
         db.collection("users")

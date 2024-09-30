@@ -43,10 +43,28 @@ struct AddOrEditTransactionView: View {
 //                                .padding(.horizontal, 20)
 //                                .padding(.top, 25)
 //                        }
-                        
-                        RoundTextField(title: "Amount", text: $viewModel.amount, keyboardType: .decimal)
-                        
-                        .padding(.horizontal, 20)
+                        HStack {
+                            RoundTextField(title: "Amount", text: $viewModel.amount, keyboardType: .decimal)
+                            
+                                .padding(.leading, 20)
+                            VStack(alignment: .trailing) {
+                                Text("Currency")
+                                    .multilineTextAlignment(.trailing)
+                                    .font(.customfont(.regular, fontSize: 14))
+                                    .foregroundColor(.gray50)
+                                    .padding(.bottom, 4)
+                                    .frame(alignment: .trailing)
+                                VStack{
+                                    Picker(selection: $viewModel.currency) {
+                                        ForEach(Currency.allCases) { curr in
+                                            Text(curr.rawValue)
+                                        }
+                                    } label: {
+                                    }
+                                }.frame(height: 48)
+                            }
+                            .padding(.trailing, 20)
+                        }
                         .padding(.top, 30)
                         .padding(.bottom, 20)
                         

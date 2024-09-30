@@ -14,4 +14,5 @@ struct ExpenseTransaction: Codable, Identifiable {
     let category: String
     let subCategory: String
     let createdDate: TimeInterval
+    let currency: String
 }

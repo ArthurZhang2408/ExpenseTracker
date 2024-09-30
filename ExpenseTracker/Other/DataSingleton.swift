@@ -66,7 +66,7 @@ class DataSingleton: ObservableObject {
     }
     
     public func getTransaction (id: String) -> ExpenseTransaction {
-        return transactions[id] ?? ExpenseTransaction(id: "", amount: 0, description: "", category: "", subCategory: "", createdDate: Date().timeIntervalSince1970)
+        return transactions[id] ?? ExpenseTransaction(id: "", amount: 0, description: "", category: "", subCategory: "", createdDate: Date().timeIntervalSince1970, currency: "CAD")
     }
     
     public func containsTransaction (id: String) -> Bool {
